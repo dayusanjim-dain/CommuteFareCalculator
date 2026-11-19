@@ -1,6 +1,6 @@
 {
   "id": "./",
-  "name": "FareTrack - Commuter Fare Manager",
+  "name": "Commute Fare Calculator - Commuter Fare Manager",
   "short_name": "FareTrack",
   "description": "Calculate, record, and review daily commuting fares.",
   "start_url": "./",
