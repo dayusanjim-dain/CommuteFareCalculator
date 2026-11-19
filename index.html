@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1c3458">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="FareTrack">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>FareTrack | Daily Commuter Fare Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><span class="logo">₱</span><div><b id="appBrand">FareTrack</b><small>COMMUTER FARE MANAGER</small></div></div>
+  <nav>
+    <button class="nav active" data-page="dashboard">▦ <span>Dashboard</span></button>
+    <button class="nav" data-page="calculator">＋ <span>Fare Calculator</span></button>
+    <button class="nav" data-page="transactions">▤ <span>Transactions</span></button>
+    <button class="nav" data-page="receipts">▧ <span>Receipts</span></button>
+    <button class="nav" data-page="reports">▥ <span>Reports</span></button>
+    <button class="nav" data-page="settings">⚙ <span>Settings</span></button>
+  </nav>
+  <div class="sidebar-note"><b>Every trip, accounted for.</b><p>Calculate, record, and review daily commuting fares.</p></div>
+  <small class="copyright">FARETRACK · STUDENT PROJECT</small>
+</aside>
+<main class="main">
+  <header>
+    <div class="head-title"><div class="eyebrow">DAILY COMMUTER MANAGEMENT</div><h1 id="pageTitle">Dashboard</h1></div>
+    <div class="head-actions"><span id="accountEmail" class="account-email">Not signed in</span><button id="accountButton" class="secondary account-button" type="button">Sign in</button>
+      <button id="installAppButton" class="primary install-button" type="button" hidden>↓ Install App</button><button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark mode">☾ <span>Dark mode</span></button><span id="todayLabel" class="today"></span></div>
+  </header>
+
+  <section class="page active" id="dashboard">
+    <div class="hero"><div><div class="eyebrow light">YOUR DAILY COMMUTE, ORGANIZED</div><h2>Welcome to FareTrack</h2><p>Here's an overview of your recorded transportation expenses.</p></div><div class="hero-mark">₱</div></div>
+    <div class="stats">
+      <article class="stat"><span>Today's expenses</span><strong id="todayTotal">₱0.00</strong><small>Recorded fares today</small></article>
+      <article class="stat"><span>Trips today</span><strong id="todayTrips">0</strong><small>Saved transactions</small></article>
+      <article class="stat"><span>This week</span><strong id="weekTotal">₱0.00</strong><small>Monday to today</small></article>
+      <article class="stat"><span>This month</span><strong id="monthTotal">₱0.00</strong><small>Current month expenses</small></article>
+    </div>
+    <div class="grid two">
+      <article class="panel"><div class="panel-head"><div><h3>Recent transactions</h3><p>Your latest recorded trips</p></div><button class="link-btn" data-open="transactions">View all →</button></div>
+        <div class="table-wrap"><table><thead><tr><th>DATE</th><th>TRANSPORT</th><th>ROUTE</th><th>TRIP</th><th>FARE</th></tr></thead><tbody id="recentRows"></tbody></table></div>
+      </article>
+      <article class="panel quick"><h3>Quick action</h3><p>Calculate a commuter's fare and save the trip to your daily log.</p><button class="primary" data-open="calculator">＋ Calculate a fare</button></article>
+    </div>
+  </section>
+
+  <section class="page" id="calculator">
+    <div class="intro"><h2>Fare calculator</h2><p>Choose a transport type, enter the route, and select one-way or round-trip travel.</p></div>
+    <div class="grid calc-grid">
+      <form class="panel" id="fareForm">
+        <div class="panel-head"><div><h3>Trip information</h3><p>Fields marked * are required</p></div></div>
+        <input type="hidden" id="editId">
+        <div class="fields">
+          <label>Commuter name<input id="commuter" placeholder="e.g. Juan Dela Cruz"></label>
+          <label>Date of travel *<input id="travelDate" type="date" required></label>
+          <label>Transportation type *<select id="transport" required><option value="">Select transport</option><option>Jeepney</option><option>Bus</option><option>UV Express</option><option>Tricycle</option><option>Train</option><option>Other</option></select></label>
+          <label>Number of passengers *<input id="passengers" type="number" min="1" step="1" value="1" required></label>
+          <label>Starting point *<input id="origin" placeholder="Starting location" required></label>
+          <label>Destination *<input id="destination" placeholder="Destination" required></label>
+          <label>Base fare per passenger *<input id="baseFare" type="number" min="0" step=".01" placeholder="0.00" required></label>
+          <label>Additional fare per passenger<input id="extraFare" type="number" min="0" step=".01" value="0"></label>
+          <label>Discount category<select id="discount"><option value="none">Regular — no discount</option><option value="student">Student</option><option value="senior">Senior Citizen</option><option value="pwd">PWD</option></select></label>
+          <label>Trip type *
+            <select id="tripType" required>
+              <option value="oneway">One-Way</option>
+              <option value="roundtrip">Round-Trip (Back and Forth)</option>
+            </select>
+          </label>
+          <label class="wide">Additional destinations (optional)<input id="stops" placeholder="Separate additional stops with commas"></label>
+        </div>
+        <div class="actions"><button type="reset" class="secondary" id="clearForm">Clear</button><button type="submit" class="primary" id="saveButton">Save transaction</button></div>
+      </form>
+      <aside class="panel fare-summary">
+        <div class="eyebrow">FARE SUMMARY</div><div class="currency-icon">₱</div><p>Estimated total fare</p><strong id="totalDisplay">₱0.00</strong>
+        <div class="summary-lines">
+          <div><span>Fare per passenger</span><b id="perPassenger">₱0.00</b></div>
+          <div><span>Passengers</span><b id="passengerCount">1</b></div>
+          <div><span>Discount</span><b id="discountPercent">0%</b></div>
+          <div><span>Trip type</span><b id="tripLabel">One-Way</b></div>
+          <div class="final"><span>Total to pay</span><b id="finalTotal">₱0.00</b></div>
+        </div>
+        <small>Round-trip automatically doubles the one-way fare before applying the passenger count and discount. Confirm official fare rules before use.</small>
+      </aside>
+    </div>
+  </section>
+
+  <section class="page" id="transactions">
+    <div class="intro"><h2>Transaction history</h2><p>Search, filter, edit, delete, and export saved commuter trips.</p></div>
+    <article class="panel">
+      <div class="toolbar"><input id="searchBox" placeholder="Search commuter, route, or transport..."><input type="date" id="dateFilter"><select id="transportFilter"><option value="">All transportation</option><option>Jeepney</option><option>Bus</option><option>UV Express</option><option>Tricycle</option><option>Train</option><option>Other</option></select><button class="secondary" id="resetFilters">Reset</button></div>
+      <div class="table-wrap"><table><thead><tr><th>DATE</th><th>COMMUTER</th><th>TRANSPORT</th><th>ROUTE</th><th>TRIP TYPE</th><th>PASS.</th><th>FARE</th><th>ACTIONS</th></tr></thead><tbody id="transactionRows"></tbody></table></div>
+      <div class="table-foot"><span id="recordCount">0 records</span><button class="secondary" id="exportCsv">↓ Export CSV</button></div>
+    </article>
+  </section>
+
+  <section class="page" id="receipts">
+    <div class="intro"><h2>Receipts</h2><p>Preview a saved fare receipt and print it or save it as a PDF.</p></div>
+    <div class="grid two receipt-grid"><article class="panel"><h3>Saved transactions</h3><div id="receiptList" class="receipt-list"></div></article><article class="panel receipt-paper" id="receiptPreview"><div class="placeholder">Select a transaction to preview its receipt.</div></article></div>
+  </section>
+
+  <section class="page" id="reports">
+    <div class="intro"><h2>Reports & analytics</h2><p>Review expenses over a selected date range. Use Print / Save PDF for a printable report.</p></div>
+    <article class="panel report-controls"><label>From<input type="date" id="reportFrom"></label><label>To<input type="date" id="reportTo"></label><button class="primary" id="applyReport">Apply range</button><button class="secondary" id="printReport">Print / Save PDF</button><button class="secondary" id="exportReport">Export CSV</button></article>
+    <div class="stats"><article class="stat"><span>Total expenses</span><strong id="reportTotal">₱0.00</strong></article><article class="stat"><span>Total trips</span><strong id="reportTrips">0</strong></article><article class="stat"><span>Average fare</span><strong id="reportAverage">₱0.00</strong></article><article class="stat"><span>Most used transport</span><strong class="small-strong" id="reportMost">—</strong></article></div>
+    <div class="grid two"><article class="panel"><h3>Fare expenses by day</h3><canvas id="expenseChart"></canvas></article><article class="panel"><h3>Trips by transportation</h3><canvas id="transportChart"></canvas></article></div>
+    <article class="panel report-table"><h3>Daily report details</h3><div class="table-wrap"><table><thead><tr><th>DATE</th><th>TRIPS</th><th>ONE-WAY</th><th>ROUND-TRIP</th><th>TOTAL FARE</th></tr></thead><tbody id="reportRows"></tbody></table></div></article>
+  </section>
+
+  <section class="page" id="settings">
+    <div class="intro"><h2>System settings</h2><p>Customize your application, fare rates, discounts, appearance, and data backups.</p></div>
+    <div class="grid two settings-grid">
+      <article class="panel"><h3>Application preferences</h3><label>Application name<input id="appName" value="FareTrack"></label><label>Currency symbol<input id="currencySymbol" value="₱" maxlength="4"></label><label>Appearance<select id="themeSelect"><option value="light">Light mode</option><option value="dark">Dark mode</option></select></label><button class="primary" id="savePreferences">Save preferences</button></article>
+      <article class="panel"><h3>Transportation fare matrix</h3><p class="muted">Default base fare per passenger. Selecting a transport in the calculator fills this value automatically.</p><div id="rateInputs" class="rate-grid"></div><button class="primary" id="saveRates">Save fare rates</button></article>
+      <article class="panel"><h3>Discount settings</h3><p class="muted">Set discount percentages for eligible commuter categories. Confirm the applicable rules in your area.</p><div class="rate-grid"><label>Student (%)<input type="number" id="studentRate" min="0" max="100" step=".1"></label><label>Senior Citizen (%)<input type="number" id="seniorRate" min="0" max="100" step=".1"></label><label>PWD (%)<input type="number" id="pwdRate" min="0" max="100" step=".1"></label></div><button class="primary" id="saveDiscounts">Save discounts</button></article>
+      <article class="panel"><h3>Data backup & restore</h3><p class="muted">Download a backup of all transactions and settings, or restore a previous FareTrack backup.</p><div class="backup-actions"><button class="secondary" id="backupData">↓ Download backup</button><label class="upload-button">↑ Restore backup<input type="file" id="restoreData" accept=".json,application/json" hidden></label></div><button class="danger" id="clearData">Delete all transactions</button></article>
+    </div>
+  </section>
+  <footer><span id="footerName">FareTrack</span> · Daily Commuter Fare Calculator</footer>
+</main>
+<div id="authGate" class="auth-gate">
+  <section class="auth-card">
+    <div class="auth-logo">₱</div>
+    <div class="eyebrow">FARETRACK ACCOUNT</div>
+    <h2 id="authTitle">Welcome to FareTrack</h2>
+    <p id="authDescription">Continue securely with your Google account to keep your fare records private and synced across devices.</p>
+    <button id="googleSignIn" class="google-signin" type="button">
+      <span class="google-mark" aria-hidden="true">G</span>
+      <span>Continue with Google</span>
+    </button>
+    <p id="authMessage" class="auth-message" role="status"></p>
+    <small>Sign in with Google to access your personal FareTrack records.</small>
+  </section>
+</div>
+<section id="installHelp" class="install-help" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle" hidden>
+  <div class="install-help-card"><button id="closeInstallHelp" class="install-help-close" type="button" aria-label="Close">×</button>
+    <div class="auth-logo">↓</div><h2 id="installHelpTitle">Install FareTrack</h2>
+    <p id="installHelpText">Add FareTrack to your device for quick access.</p><div id="installHelpSteps" class="install-help-steps"></div>
+    <button id="installHelpDone" class="primary" type="button">Got it</button>
+  </div>
+</section>
+<div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+<script src="pwa.js"></script>
+</body></html>
