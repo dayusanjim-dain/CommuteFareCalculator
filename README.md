@@ -1,4 +1,4 @@
-# Compute Fare Calculator
+# Commute Fare Calculator
 
 ## Short Description
 
@@ -47,7 +47,7 @@ Compute Fare Calculator is a web-based application that allows users to calculat
 ## How to Use the Application
 
 ### 1. Sign In
-- Open Compute Fare Calculator.
+- Open Commute Fare Calculator.
 - Click the Google sign-in button.
 - Select your Google account.
 - Once authenticated, you can access the application's features.
