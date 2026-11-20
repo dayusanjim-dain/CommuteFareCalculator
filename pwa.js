@@ -12,7 +12,7 @@
  if(ios)btn.hidden=false;else addEventListener("load",()=>{if(!promptEvent)btn.hidden=false;});
  btn.addEventListener("click",async()=>{
   if(promptEvent){promptEvent.prompt();await promptEvent.userChoice;promptEvent=null;btn.hidden=true;return;}
-  if(ios){help("Add FareTrack to your Home Screen","On iPhone or iPad, use Safari's Share menu to install this website.","<ol><li>Open this website in <b>Safari</b>.</li><li>Tap the <b>Share</b> button.</li><li>Choose <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>.</li></ol>");return;}
-  help("Install FareTrack","Your browser may not provide an automatic install prompt. Try its install option.","<ol><li>Open FareTrack from its secure HTTPS website.</li><li>Open your browser menu.</li><li>Choose <b>Install app</b> or <b>Add to Home screen</b>, if available.</li></ol><p class='install-note'>Availability depends on the browser and device.</p>");
+  if(ios){help("Add Commute Fare Calculator to your Home Screen","On iPhone or iPad, use Safari's Share menu to install this website.","<ol><li>Open this website in <b>Safari</b>.</li><li>Tap the <b>Share</b> button.</li><li>Choose <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>.</li></ol>");return;}
+  help("Install Commute Fare Calculator","Your browser may not provide an automatic install prompt. Try its install option.","<ol><li>Open Commute Fare Calculator from its secure HTTPS website.</li><li>Open your browser menu.</li><li>Choose <b>Install app</b> or <b>Add to Home screen</b>, if available.</li></ol><p class='install-note'>Availability depends on the browser and device.</p>");
  });
 })();
