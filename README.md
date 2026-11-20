@@ -2,7 +2,7 @@
 
 ## Short Description
 
-Compute Fare Calculator is a web-based application that allows users to calculate transportation fares, manage transactions, generate receipts, and monitor transportation expenses. It also provides Google account authentication and Supabase cloud storage to keep user data saved and accessible.
+Commute Fare Calculator is a web-based application that allows users to calculate transportation fares, manage transactions, generate receipts, and monitor transportation expenses. It also provides Google account authentication and Supabase cloud storage to keep user data saved and accessible.
 
 ## Features
 
@@ -115,7 +115,7 @@ Compute Fare Calculator is a web-based application that allows users to calculat
 The application is hosted using GitHub Pages.
 
 **Live Website:**  
-https://dayusanjim-dain.github.io/ComputeFareCalculatorNew/
+https://dayusanjim-dain.github.io/CommuteFareCalculatorNew/
 
 ## Developer Information
 
@@ -123,4 +123,4 @@ https://dayusanjim-dain.github.io/ComputeFareCalculatorNew/
 
 **Section:** BSINTE-2A
 
-**Project Title:** Compute Fare Calculator
+**Project Title:** Commute Fare Calculator
