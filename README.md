@@ -115,7 +115,7 @@ Compute Fare Calculator is a web-based application that allows users to calculat
 The application is hosted using GitHub Pages.
 
 **Live Website:**  
-https://dayusanjim-dain.github.io/ComputeFareCalculatorNew/
+https://dayusanjim-dain.github.io/CommuteFareCalculatorNew/
 
 ## Developer Information
 
