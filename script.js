@@ -23,7 +23,7 @@ let authGeneration = 0;
 let cloudSaveQueue = Promise.resolve();
 
 const defaults = {
-  name: 'Compute Fare Calculator',
+  name: 'Commute Fare Calculator',
   currency: '₱',
   theme: 'light',
   rates: {
@@ -244,7 +244,7 @@ function openPage(id) {
     receipts: 'Receipts',
     reports: 'Reports & Analytics',
     settings: 'Settings'
-  })[id] || 'Compute Fare Calculator';
+  })[id] || 'Commute Fare Calculator';
 
   if (id === 'reports') renderReports();
   if (id === 'settings') loadSettings();
@@ -917,7 +917,7 @@ function applyBrand() {
 
 $('savePreferences').onclick = () => {
   settings.name =
-    $('appName').value.trim() || 'Compute Fare Calculator';
+    $('appName').value.trim() || 'Commute Fare Calculator';
 
   settings.currency =
     $('currencySymbol').value.trim() || '₱';
@@ -1066,7 +1066,7 @@ function showAuthGate(show) {
 
 function updateAuthPanel() {
   $('authTitle').textContent =
-    'Welcome to Compute Fare Calculator';
+    'Welcome to Commute Fare Calculator';
 
   $('authDescription').textContent =
     'Continue securely with your Google account to keep your fare records private and synced across devices.';
