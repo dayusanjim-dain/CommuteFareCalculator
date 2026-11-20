@@ -5,7 +5,7 @@
   <meta name="theme-color" content="#1c3458">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="FareTrack">
+  <meta name="apple-mobile-web-app-title" content="Commute Fare Calculator">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <title>Commute Fare Calculator | Daily Commuter Fare Calculator</title>
@@ -114,7 +114,7 @@
   <section class="page" id="settings">
     <div class="intro"><h2>System settings</h2><p>Customize your application, fare rates, discounts, appearance, and data backups.</p></div>
     <div class="grid two settings-grid">
-      <article class="panel"><h3>Application preferences</h3><label>Application name<input id="appName" value="FareTrack"></label><label>Currency symbol<input id="currencySymbol" value="₱" maxlength="4"></label><label>Appearance<select id="themeSelect"><option value="light">Light mode</option><option value="dark">Dark mode</option></select></label><button class="primary" id="savePreferences">Save preferences</button></article>
+      <article class="panel"><h3>Application preferences</h3><label>Application name<input id="appName" value="Commute Fare Calculator"></label><label>Currency symbol<input id="currencySymbol" value="₱" maxlength="4"></label><label>Appearance<select id="themeSelect"><option value="light">Light mode</option><option value="dark">Dark mode</option></select></label><button class="primary" id="savePreferences">Save preferences</button></article>
       <article class="panel"><h3>Transportation fare matrix</h3><p class="muted">Default base fare per passenger. Selecting a transport in the calculator fills this value automatically.</p><div id="rateInputs" class="rate-grid"></div><button class="primary" id="saveRates">Save fare rates</button></article>
       <article class="panel"><h3>Discount settings</h3><p class="muted">Set discount percentages for eligible commuter categories. Confirm the applicable rules in your area.</p><div class="rate-grid"><label>Student (%)<input type="number" id="studentRate" min="0" max="100" step=".1"></label><label>Senior Citizen (%)<input type="number" id="seniorRate" min="0" max="100" step=".1"></label><label>PWD (%)<input type="number" id="pwdRate" min="0" max="100" step=".1"></label></div><button class="primary" id="saveDiscounts">Save discounts</button></article>
       <article class="panel"><h3>Data backup & restore</h3><p class="muted">Download a backup of all transactions and settings, or restore a previous FareTrack backup.</p><div class="backup-actions"><button class="secondary" id="backupData">↓ Download backup</button><label class="upload-button">↑ Restore backup<input type="file" id="restoreData" accept=".json,application/json" hidden></label></div><button class="danger" id="clearData">Delete all transactions</button></article>
